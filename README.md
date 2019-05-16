@@ -34,7 +34,7 @@ $client = new PageplannerClient([
 // Get all issues.
 $issues = $client->getIssues();
 foreach ($issues->getIterator() as $issue) {
-  print $issue['name']';
+  print $issue['name'];
 }
 
 // Get a issue by id.
