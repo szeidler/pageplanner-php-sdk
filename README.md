@@ -44,7 +44,7 @@ print $issue->offsetGet('name');
 // Get all publications.
 $publications = $client->getPublications();
 foreach ($publications->getIterator() as $publication) {
-  print $publication['name']';
+  print $publication['name'];
 }
 
 // Get a single publication by id.
@@ -55,7 +55,7 @@ print $publication->offsetGet('publicationCode');
 // Get all stories for an issue.
 $stories = $client->getStories(['issueId' => 5]);
 foreach ($stories->getIterator() as $story) {
-  print $story['name']';
+  print $story['name'];
 }
 
 // Get a single story by id.
