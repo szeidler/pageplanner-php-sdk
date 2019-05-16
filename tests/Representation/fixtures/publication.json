@@ -1,0 +1,17 @@
+{
+  "id": 18,
+  "name": "Elle Demo",
+  "publicationCode": "Elle",
+  "created": {
+    "id": 2,
+    "username": "admin",
+    "name": "Administrator",
+    "date": "2017-09-05T17:32:34.437"
+  },
+  "lastChanged": {
+    "id": 2,
+    "username": "admin",
+    "name": "Administrator",
+    "date": "2018-10-01T14:11:13.903"
+  }
+}

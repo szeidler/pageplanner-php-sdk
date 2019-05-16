@@ -2,8 +2,8 @@
 
 namespace szeidler\Pageplanner\Tests\Representation;
 
-use GuzzleHttp\Command\Exception\CommandClientException;
 use GuzzleHttp\Command\ResultInterface;
+use GuzzleHttp\Psr7\Response;
 use szeidler\Pageplanner\Tests\PageplannerTestWrapper;
 
 /**
@@ -19,7 +19,10 @@ class PublicationTest extends PageplannerTestWrapper
      */
     public function testGetPublications()
     {
-        $response = $this->client->getPublications();
+        $responses = [new Response(200, [], file_get_contents(__DIR__ . '/fixtures/publications.json'))];
+        $client = $this->getMockedPageplannerClient($responses);
+
+        $response = $client->getPublications();
         $this->assertInstanceOf(ResultInterface::class, $response,
           'The response is not a proper Guzzle result.');
 
@@ -31,6 +34,25 @@ class PublicationTest extends PageplannerTestWrapper
 
         $this->assertArrayHasKey('name', $response->offsetGet(0),
           'The publication should have a name.');
+    }
+
+    /**
+     * Tests, that the single Publication request returns a valid response.
+     */
+    public function testGetPublication()
+    {
+        $responses = [new Response(200, [], file_get_contents(__DIR__ . '/fixtures/publication.json'))];
+        $client = $this->getMockedPageplannerClient($responses);
+
+        $response = $client->getPublications(['id' => 18]);
+        $this->assertInstanceOf(ResultInterface::class, $response,
+          'The response is not a proper Guzzle result.');
+
+        $this->assertNotEmpty($response->offsetGet('name'),
+          'The publication should have a name.');
+
+        $this->assertNotEmpty($response->offsetGet('publicationCode'),
+          'The publication should have a publicationcode.');
     }
 
 }
