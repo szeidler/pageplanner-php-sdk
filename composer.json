@@ -1,0 +1,33 @@
+{
+    "name": "szeidler/pageplanner-php-sdk",
+    "description": "Pageplanner PHP SDK",
+    "keywords": ["pageplanner"],
+    "homepage": "https://github.com/szeidler/pageplanner-php-sdk",
+    "require": {
+        "php": ">=7.0",
+        "guzzlehttp/guzzle": "^6.3",
+        "psr/http-message": "^1.0",
+        "guzzlehttp/guzzle-services": "^1.1",
+        "kamermans/guzzle-oauth2-subscriber": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Stephan Zeidler",
+            "email": "info@stephanzeidler.de"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "szeidler\\Pageplanner\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "szeidler\\Pageplanner\\Tests\\": "tests"
+        }
+    }
+}

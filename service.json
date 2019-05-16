@@ -1,0 +1,247 @@
+{
+  "name": "PagePlanner API",
+  "apiVersion": "V1",
+  "baseUrl": "https://preportal.pageplanner.no/api-demo/api",
+  "description": "API for accessing the PagePlanner API.",
+  "operations": {
+    "test": {
+      "httpMethod": "POST",
+      "uri": "Test",
+      "responseModel": "BaseResponse",
+      "summary": "Test the client authentication."
+    },
+    "getIssue": {
+      "httpMethod": "GET",
+      "uri": "Issue/{id}",
+      "summary": "Returns the designated issue.",
+      "responseModel": "BaseResponse",
+      "parameters": {
+        "id": {
+          "type": "numeric",
+          "location": "uri",
+          "required": true,
+          "description": "The issue id, that should be requested."
+        }
+      }
+    },
+    "getIssues": {
+      "httpMethod": "GET",
+      "uri": "Issues",
+      "summary": "Returns the available issues.",
+      "responseModel": "BaseResponse",
+      "parameters": {
+        "publicationId": {
+          "type": "numeric",
+          "location": "query",
+          "required": true,
+          "description": "The publication id for which the issues should be requested."
+        },
+        "issueYear": {
+          "type": "numeric",
+          "location": "query",
+          "description": "The year the issue was created."
+        }
+      }
+    },
+    "getPublication": {
+      "httpMethod": "GET",
+      "uri": "Publication/{id}",
+      "summary": "Returns the designated publication.",
+      "responseModel": "BaseResponse",
+      "parameters": {
+        "id": {
+          "type": "numeric",
+          "location": "uri",
+          "required": true,
+          "description": "The publication id, that should be requested."
+        }
+      }
+    },
+    "getPublications": {
+      "httpMethod": "GET",
+      "uri": "Publications",
+      "summary": "Returns the available publications.",
+      "responseModel": "BaseResponse",
+      "parameters": {}
+    },
+    "getStory": {
+      "httpMethod": "GET",
+      "uri": "Story/{id}",
+      "summary": "Returns the designated story.",
+      "responseModel": "BaseResponse",
+      "parameters": {
+        "id": {
+          "type": "numeric",
+          "location": "uri",
+          "required": true,
+          "description": "The story id, that should be requested."
+        },
+        "includeAllFiles": {
+          "type": "boolean",
+          "location": "query",
+          "description": "Boolean if all files should be included."
+        }
+      }
+    },
+    "createStory": {
+      "httpMethod": "POST",
+      "uri": "Story",
+      "summary": "Creates a new story.",
+      "responseModel": "BaseResponse",
+      "parameters": {
+        "id": {
+          "type": "string",
+          "location": "json",
+          "required": true,
+          "description": "An identifier for the story."
+        },
+        "title": {
+          "type": "object",
+          "location": "json",
+          "description": "The title of the story.",
+          "required": true,
+          "extends": "TextField"
+        },
+        "abstract": {
+          "type": "object",
+          "location": "json",
+          "description": "The abstract of the story.",
+          "extends": "TextField"
+        },
+        "body": {
+          "type": "object",
+          "location": "json",
+          "description": "The body of the story.",
+          "extends": "TextField"
+        },
+        "additionalFields": {
+          "type": "array",
+          "location": "json",
+          "description": "The tags of the story.",
+          "items": {
+            "type": "object",
+            "extends": "TextFieldDetailed"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "location": "json",
+          "description": "The tags of the story.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "getStories": {
+      "httpMethod": "GET",
+      "uri": "Stories",
+      "summary": "Returns the available publications.",
+      "responseModel": "BaseResponse",
+      "parameters": {
+        "issueId": {
+          "type": "numeric",
+          "location": "query",
+          "description": "The issue id for which the stories should be requested."
+        },
+        "containerId": {
+          "type": "numeric",
+          "location": "query",
+          "description": "The container id."
+        }
+      }
+    }
+  },
+  "models": {
+    "BaseResponse": {
+      "type": "object",
+      "additionalProperties": {
+        "location": "json"
+      }
+    },
+    "Story": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "location": "json",
+          "description": "Id of the story."
+        },
+        "title": {
+          "type": "object",
+          "location": "json",
+          "description": "The title of the story.",
+          "extends": "TextField"
+        },
+        "abstract": {
+          "type": "object",
+          "location": "json",
+          "description": "The abstract of the story.",
+          "extends": "TextField"
+        },
+        "body": {
+          "type": "object",
+          "location": "json",
+          "description": "The body of the story.",
+          "extends": "TextField"
+        },
+        "additionalFields": {
+          "type": "array",
+          "location": "json",
+          "description": "The tags of the story.",
+          "items": {
+            "type": "object",
+            "extends": "TextFieldDetailed"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "location": "json",
+          "description": "The tags of the story.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TextField": {
+      "type": "object",
+      "location": "json",
+      "description": "A textfield.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "location": "json",
+          "description": "Value of the textfield."
+        },
+        "isHtml": {
+          "type": "boolean",
+          "location": "json",
+          "description": "Indicates if the value includes HTML."
+        }
+      }
+    },
+    "TextFieldDetailed": {
+      "type": "object",
+      "location": "json",
+      "description": "A detailed textfield.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "location": "json",
+          "description": "Unique name of the textfield."
+        },
+        "value": {
+          "type": "string",
+          "location": "json",
+          "description": "Value of the textfield."
+        },
+        "isHtml": {
+          "type": "boolean",
+          "location": "json",
+          "description": "Indicates if the value includes HTML."
+        }
+      }
+    }
+  }
+}

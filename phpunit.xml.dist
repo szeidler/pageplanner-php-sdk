@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit colors="true" bootstrap="./vendor/autoload.php">
+    <php>
+        <env name="BASE_URL" value="https://preportal.pageplanner.no/api-demo/api"/>
+        <env name="ACCESS_TOKEN_URL" value="https://accesstoken.com/pageplannersolutions.com/oauth2/token"/>
+        <env name="CLIENT_ID" value="xxx"/>
+        <env name="CLIENT_SECRET" value="xxx"/>
+    </php>
+    <testsuites>
+        <testsuite name="Pageplanner PHP SDK Test Suite">
+            <directory>./tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
+</phpunit>
